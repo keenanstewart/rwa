@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Headers,Http } from "@angular/http";
+import { Headers, Http } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import "../rxjs-extensions";
 
@@ -12,6 +12,7 @@ export class CategoryService
 
     constructor(private http: Http)
     {
+        console.log("In CategoryService constructor");
     }
 
     getCategories(): Observable<Category[]>

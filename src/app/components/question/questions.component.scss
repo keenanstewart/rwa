@@ -1,3 +1,20 @@
-﻿.answer.correct span::before {
+.answer.correct span::before {
     content: '\2713';
+}
+
+mat-card-content>:last-child, mat-card>:last-child {
+    margin-bottom: 1rem;
+}
+
+mat-card-content>:first-child, md-card>:first-child {
+    margin-top: 1rem;
+}
+
+mat-card {
+    margin: 1rem;
+}
+
+.question-card {
+    width: 400px;
+    min-width: 350px;
 }

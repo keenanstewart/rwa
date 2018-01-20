@@ -3,6 +3,26 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import "hammerjs";
+import
+{
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatChipsModule,
+    // MatNavList,
+} from "@angular/material";
+
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { routes } from "./app.route";
 import { AppComponent } from "./components/app/app.component";
@@ -22,8 +42,24 @@ import { QuestionService } from "./services/question.service";
         BrowserModule,
         // Router
         RouterModule.forRoot(routes),
+        // Flex
+        FlexLayoutModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        // Material
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatChipsModule,
+        BrowserAnimationsModule,
+        // MatNavList,
     ],
     providers: [
         CategoryService, TagService, QuestionService

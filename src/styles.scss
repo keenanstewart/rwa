@@ -9,7 +9,8 @@
 // @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink";
 // @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey";
 // @import "../node_modules/@angular/material/prebuilt-themes/purple-green.scss";
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.scss';
+@import "~@angular/material/theming";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.scss";
 
 html, body{
     margin: 0;

@@ -1,10 +1,7 @@
-// @import '~@angular/material/core/theming/all-theme';
-@import "../node_modules/@angular/material/_theming.scss";
-
 // Include the base styles for Angular Material core.
 @include mat-core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// Define the palettes for your theme using the Material nbDesign palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $trivia-app-primary: mat-palette($mat-indigo);

@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
         "styles": [
-            "rwa-trivia-theme.scss",
+            "rwa-trivia.theme.scss",
             "styles.scss"
         ],
         "scripts": [

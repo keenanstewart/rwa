@@ -1,11 +1,11 @@
 <!-- question-add-update.component.html -->
 
 <mat-card>
-    <form class="question-form">
+    <form (ngSubmit)="onSubmit()" class="question-form" [formGroup]="questionForm" novalidate>
         <mat-card-title>Add Question</mat-card-title>
         <mat-card-header>
             <mat-card-title>
-                <mat-select placeholder="Category" name="category">
+                <mat-select placeholder="Category" name="category" formControlName="category">
                     <mat-option *ngFor="let category of categories" [value]="category.id">
                         {{ category.categoryName }}
                     </mat-option>
@@ -15,17 +15,39 @@
 
         <mat-card-content>
             <mat-list>
-                <mat-input-container class="full-width">
-                    <input matInput placeholder="Question" />
+                <mat-input-container class="full-width required">
+                    <input matInput placeholder="Question"
+                           formControlName="questionText"
+                           class="required" />
+                    <mat-hint align="end" *ngIf="questionForm.controls.questionText.errors && !questionForm.controls.questionText.pristine"
+                              class="error">Question is required!</mat-hint>
                 </mat-input-container>
-                <p *ngFor="let index of [1, 2, 3, 4]">
-                    <mat-input-container class="full-width">
-                        <mat-checkbox mat-prefix></mat-checkbox>
-                        <input matInput [placeholder]="'Answer: ' + index" />
-                        <mat-hint align="end">Answer {{ index }}</mat-hint>
-                    </mat-input-container>
-                </p>
+
+                <div class="error" *ngIf="answers.valid && questionForm.hasError('correctAnswerCountInvalid')">
+                    Pick one and only one correct answer
+                </div>
+
+                <!--<p *ngFor="let index of [1, 2, 3, 4]">-->
+                <div formArrayName="answers" class="well well-lg">
+                    <div *ngFor="let answer of answers.controls; let i=index"
+                         [formGroupName]="i">
+                        <mat-input-container class="full-width required">
+                            <mat-checkbox mat-prefix formControlName="correct"></mat-checkbox>
+                            <input matInput [placeholder]="'Answer: ' + (i+1)"
+                                   formControlName="answerText" />
+                            <!-- * ngIf ="questionForm.controls.answerText.errors && !questionForm.controls.answerText.pristine" -->
+                            <mat-hint align="end"
+                                      class="error">Answer is required!</mat-hint>
+                        </mat-input-container>
+                    </div>
+                </div>
+                <!--</p>-->
             </mat-list>
+
+            <div class="error" *ngIf="answers.valid && questionForm.controls.questionText.valid && questionForm.hasError('tagCountInvalid')">
+                Must have atleast 3 tags
+            </div>
+
             <p>
                 <mat-input-container>
                     <input matInput placeholder="Tag" />
@@ -33,11 +55,11 @@
             </p>
 
             <mat-chip-list>
-                <mat-chip>
-                    Tag 1
+                <mat-chip *ngFor="let tag of autoTags">
+                    {{ tag }}
                 </mat-chip>
-                <mat-chip>
-                    Tag 2
+                <mat-chip *ngFor="let tag of enteredTags">
+                    {{ tag }} <span (click)="removeEnteredTag(tag)" class="remove-tag">x</span>
                 </mat-chip>
             </mat-chip-list>
         </mat-card-content>
@@ -45,6 +67,8 @@
         <mat-card-actions>
             <button mat-button>SAVE</button>
             <button mat-button>CANCEL</button>
+            <button mat-button color="primary" [disabled]="questionForm.controls.tags.value==''"
+                    (click)="addTag()">ADD</button>
         </mat-card-actions>
     </form>
 </mat-card>

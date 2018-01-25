@@ -11,7 +11,7 @@ import
 } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { Category, Question,/* Answer*/ } from "../../model";
+import { Category, Question, Answer } from "../../model";
 import { CategoryService,TagService,QuestionService } from "../../services";
 
 @Component({
@@ -20,12 +20,11 @@ import { CategoryService,TagService,QuestionService } from "../../services";
 })
 export class QuestionAddUpdateComponent implements OnInit,OnDestroy
 {
-
     //Properties
     categories: Category[];
     sub: any;
 
-    tags: string[];
+    tags: string[] = [];
     sub2: any;
 
     questionForm: FormGroup;
@@ -129,11 +128,11 @@ export class QuestionAddUpdateComponent implements OnInit,OnDestroy
 
     saveQuestion(question: Question)
     {
-        //this.questionService.saveQuestion(question).subscribe(response =>
-        //{
-        //    console.log("navigating ...");
-        //    this.router.navigate(["/questions"]);
-        //});
+        this.questionService.saveQuestion(question).subscribe(response =>
+        {
+            console.log("navigating ...");
+            this.router.navigate(["/questions"]);
+        });
     }
 
     computeAutoTags()
@@ -163,7 +162,6 @@ export class QuestionAddUpdateComponent implements OnInit,OnDestroy
     }
     createForm(question: Question)
     {
-
         let fgs: FormGroup[] = question.answers.map(answer =>
         {
             let fg = new FormGroup({
@@ -194,19 +192,18 @@ export class QuestionAddUpdateComponent implements OnInit,OnDestroy
         },{ validator: questionFormValidator }
         );
     }
-
 }
 
 //Custom Validators
 function questionFormValidator(fg: FormGroup): { [key: string]: boolean }
 {
-    //let answers: Answer[] = fg.get("answers").value;
-    //if (answers.filter(answer => answer.correct).length !== 1)
-    //    return { "correctAnswerCountInvalid": true }
+    let answers: Answer[] = fg.get("answers").value;
+    if (answers.filter(answer => answer.correct).length !== 1)
+        return { "correctAnswerCountInvalid": true }
 
-    //let tags: string[] = fg.get("tagsArray").value;
-    //if (tags.length < 3)
-    //    return { "tagCountInvalid": true }
+    let tags: string[] = fg.get("tagsArray").value;
+    if (tags.length < 3)
+        return { "tagCountInvalid": true }
 
     return null;
 }

@@ -25,6 +25,8 @@ import
     // MatNavList,
 } from "@angular/material";
 
+// import { MaterialModule } from "@angular/material";
+
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { routes } from "./app.route";
@@ -37,6 +39,9 @@ import { QuestionAddUpdateComponent } from "./components/question/question-add-u
 import { CategoryService } from "./services/category.service";
 import { TagService } from "./services/tag.service";
 import { QuestionService } from "./services/question.service";
+import { StoreModule, Store } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { CategoryActions } from "./store/actions/category.actions";
 
 @NgModule({
     declarations: [
@@ -51,11 +56,13 @@ import { QuestionService } from "./services/question.service";
         // Router
         RouterModule.forRoot(routes),
         // Flex
+        // FlexLayoutModule.forRoot(),
         FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
         // Material
+        // MaterialModule.forRoot(),
         MatButtonModule,
         MatCardModule,
         MatIconModule,
@@ -71,10 +78,17 @@ import { QuestionService } from "./services/question.service";
         MatSelectModule,
         MatFormFieldModule,
         BrowserAnimationsModule,
+
         // MatNavList,
+        // store
+        // StoreModule.provideStore(reducer),
+        // StoreModule.forRoot(
+        // ngrx effectd
+        // EffectsModule.run(CategoryEffects)
+        // EffectsModule.
     ],
     providers: [
-        CategoryService, TagService, QuestionService
+        CategoryService, TagService, QuestionService, CategoryActions
     ],
     bootstrap: [AppComponent]
 })
